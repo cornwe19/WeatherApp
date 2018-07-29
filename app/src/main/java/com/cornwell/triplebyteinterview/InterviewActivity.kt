@@ -1,23 +1,31 @@
 package com.cornwell.triplebyteinterview
 
 import android.os.Bundle
-import android.support.design.widget.Snackbar
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-
 import kotlinx.android.synthetic.main.activity_interview.*
+import kotlinx.android.synthetic.main.content_interview.*
+import java.util.*
 
 class InterviewActivity : AppCompatActivity() {
+    val sampleTransactions = listOf(
+            Transaction("Expenses", "Bought Groceries", 125.00, Date(1532393495000)),
+            Transaction("Fun", "Went on a trip", 1500.00, Date(1532307095000)),
+            Transaction("Expenses", "Paid Mortgage", 1200.00, Date(1532393495000))
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_interview)
         setSupportActionBar(toolbar)
 
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
+        val transactionAdapter = TransactionAdapter()
+        transactions.adapter = transactionAdapter
+        transactionAdapter.setTransactions(sampleTransactions)
+
+        fab.setOnClickListener { _ ->
+            transactionAdapter.addTransaction(Transaction("ABC", "Bought a lambo", 130000.00, Date(1532047895000)))
         }
     }
 
