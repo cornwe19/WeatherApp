@@ -16,7 +16,9 @@ interface WeatherApi {
         SAN_DIEGO(2487889)
     }
     
-    companion object QueryFor {
+    companion object {
+        const val TIME_FORMAT = "EEE, dd MMM yyyy hh:mm aa zzz"
+
         fun conditionsAtLocation(location: Location) = conditionsAtLocation(location.woeid)
 
         // TODO YQL Query builder

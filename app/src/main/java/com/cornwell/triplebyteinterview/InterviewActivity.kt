@@ -22,7 +22,7 @@ class InterviewActivity : AppCompatActivity() {
     private val retrofit = Retrofit.Builder()
             .baseUrl(BuildConfig.ENDPOINT)
             .addConverterFactory(GsonConverterFactory.create(
-                    GsonBuilder().setDateFormat("EEE, dd MMM yyyy hh:mm aa zzz").create()))
+                    GsonBuilder().setDateFormat(WeatherApi.TIME_FORMAT).create()))
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()
     private val dateFormat = SimpleDateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT)
