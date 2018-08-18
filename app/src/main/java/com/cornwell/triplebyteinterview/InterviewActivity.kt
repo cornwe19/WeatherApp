@@ -7,17 +7,19 @@ import android.view.Menu
 import android.view.MenuItem
 import com.cornwell.triplebyteinterview.data.WeatherApi
 import com.cornwell.triplebyteinterview.data.WeatherApi.Location
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import io.reactivex.Scheduler
 import kotlinx.android.synthetic.main.activity_interview.*
 import kotlinx.android.synthetic.main.content_interview.*
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import javax.inject.Inject
+import javax.inject.Named
 
 class InterviewActivity : AppCompatActivity() {
-    @Inject
-    internal lateinit var weatherApi: WeatherApi
+    @Inject internal lateinit var weatherApi: WeatherApi
+    @Inject @field:Named("main") internal lateinit var mainScheduler: Scheduler
+    @Inject @field:Named("background") internal lateinit var backgroundScheduler: Scheduler
+
     private val dateFormat = SimpleDateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,8 +31,8 @@ class InterviewActivity : AppCompatActivity() {
 
         fab.setOnClickListener { _ ->
             weatherApi.makeQuery(WeatherApi.conditionsAtLocation(Location.ROCHESTER))
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(backgroundScheduler)
+                    .observeOn(mainScheduler)
                     .subscribe({
                         location.text = "${it.location.city}, ${it.location.region}"
                         temperature.text = "${it.item.condition.temp}°"
