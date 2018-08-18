@@ -7,24 +7,17 @@ import android.view.Menu
 import android.view.MenuItem
 import com.cornwell.triplebyteinterview.data.WeatherApi
 import com.cornwell.triplebyteinterview.data.WeatherApi.Location
-import com.google.gson.GsonBuilder
-import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_interview.*
 import kotlinx.android.synthetic.main.content_interview.*
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import java.text.DateFormat
 import java.text.SimpleDateFormat
+import javax.inject.Inject
 
 class InterviewActivity : AppCompatActivity() {
-    private val retrofit = Retrofit.Builder()
-            .baseUrl(BuildConfig.ENDPOINT)
-            .addConverterFactory(GsonConverterFactory.create(
-                    GsonBuilder().setDateFormat(WeatherApi.TIME_FORMAT).create()))
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .build()
+    @Inject
+    internal lateinit var weatherApi: WeatherApi
     private val dateFormat = SimpleDateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,9 +25,10 @@ class InterviewActivity : AppCompatActivity() {
         setContentView(R.layout.activity_interview)
         setSupportActionBar(toolbar)
 
+        InterviewApplication.app.network.inject(this)
+
         fab.setOnClickListener { _ ->
-            retrofit.create(WeatherApi::class.java)
-                    .makeQuery(WeatherApi.conditionsAtLocation(Location.SAN_DIEGO))
+            weatherApi.makeQuery(WeatherApi.conditionsAtLocation(Location.ROCHESTER))
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe({
