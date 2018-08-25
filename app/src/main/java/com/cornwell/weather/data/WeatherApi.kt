@@ -1,4 +1,4 @@
-package com.cornwell.triplebyteinterview.data
+package com.cornwell.weather.data
 
 import io.reactivex.Observable
 import retrofit2.http.GET

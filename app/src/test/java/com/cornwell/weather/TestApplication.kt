@@ -1,15 +1,15 @@
-package com.cornwell.triplebyteinterview
+package com.cornwell.weather
 
-import com.cornwell.triplebyteinterview.components.DaggerNetworkComponent
-import com.cornwell.triplebyteinterview.components.NetworkModule
-import com.cornwell.triplebyteinterview.components.SchedulerModule
-import com.cornwell.triplebyteinterview.data.WeatherApi
+import com.cornwell.weather.components.DaggerNetworkComponent
+import com.cornwell.weather.components.NetworkModule
+import com.cornwell.weather.components.SchedulerModule
+import com.cornwell.weather.data.WeatherApi
 import io.reactivex.Scheduler
 import io.reactivex.schedulers.Schedulers
 import org.mockito.Mockito.mock
 import retrofit2.Retrofit
 
-class TestApplication : InterviewApplication() {
+class TestApplication : WeatherApplication() {
     override fun onCreate() {
         super.onCreate()
         network = DaggerNetworkComponent.builder()

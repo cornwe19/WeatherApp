@@ -1,4 +1,4 @@
-package com.cornwell.triplebyteinterview.data
+package com.cornwell.weather.data
 
 import java.util.*
 

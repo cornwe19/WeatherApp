@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.cornwell.triplebyteinterview"
+<manifest package="com.cornwell.weather"
           xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -9,11 +9,11 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:name=".InterviewApplication"
+        android:name="com.cornwell.weather.WeatherApplication"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".InterviewActivity"
+            android:name="com.cornwell.weather.WeatherActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>

@@ -1,4 +1,4 @@
-package com.cornwell.triplebyteinterview.components
+package com.cornwell.weather.components
 
 import dagger.Module
 import dagger.Provides

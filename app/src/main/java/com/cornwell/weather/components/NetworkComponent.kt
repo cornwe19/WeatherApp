@@ -1,11 +1,11 @@
-package com.cornwell.triplebyteinterview.components
+package com.cornwell.weather.components
 
-import com.cornwell.triplebyteinterview.InterviewActivity
+import com.cornwell.weather.WeatherActivity
 import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
 @Component(modules = [NetworkModule::class, SchedulerModule::class])
 interface NetworkComponent {
-    fun inject(activity: InterviewActivity)
+    fun inject(activity: WeatherActivity)
 }

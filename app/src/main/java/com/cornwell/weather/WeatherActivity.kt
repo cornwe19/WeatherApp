@@ -1,21 +1,21 @@
-package com.cornwell.triplebyteinterview
+package com.cornwell.weather
 
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import com.cornwell.triplebyteinterview.data.WeatherApi
-import com.cornwell.triplebyteinterview.data.WeatherApi.Location
+import com.cornwell.weather.data.WeatherApi
+import com.cornwell.weather.data.WeatherApi.Location
 import io.reactivex.Scheduler
-import kotlinx.android.synthetic.main.activity_interview.*
-import kotlinx.android.synthetic.main.content_interview.*
+import kotlinx.android.synthetic.main.activity_weather.*
+import kotlinx.android.synthetic.main.content_weather.*
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import javax.inject.Inject
 import javax.inject.Named
 
-class InterviewActivity : AppCompatActivity() {
+class WeatherActivity : AppCompatActivity() {
     @Inject internal lateinit var weatherApi: WeatherApi
     @Inject @field:Named("main") internal lateinit var mainScheduler: Scheduler
     @Inject @field:Named("background") internal lateinit var backgroundScheduler: Scheduler
@@ -24,10 +24,10 @@ class InterviewActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_interview)
+        setContentView(R.layout.activity_weather)
         setSupportActionBar(toolbar)
 
-        InterviewApplication.app.network.inject(this)
+        WeatherApplication.sApp.network.inject(this)
 
         fab.setOnClickListener { _ ->
             weatherApi.makeQuery(WeatherApi.conditionsAtLocation(Location.ROCHESTER))

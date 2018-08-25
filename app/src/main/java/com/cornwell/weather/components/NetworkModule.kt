@@ -1,7 +1,7 @@
-package com.cornwell.triplebyteinterview.components
+package com.cornwell.weather.components
 
-import com.cornwell.triplebyteinterview.BuildConfig
-import com.cornwell.triplebyteinterview.data.WeatherApi
+import com.cornwell.weather.BuildConfig
+import com.cornwell.weather.data.WeatherApi
 import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import dagger.Module

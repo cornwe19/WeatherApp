@@ -1,12 +1,10 @@
-package com.cornwell.triplebyteinterview
+package com.cornwell.weather
 
-import android.view.View
-import android.view.ViewGroup
 import android.widget.TextView
-import com.cornwell.triplebyteinterview.data.*
+import com.cornwell.weather.data.*
 import io.reactivex.Observable
-import kotlinx.android.synthetic.main.activity_interview.*
-import kotlinx.android.synthetic.main.content_interview.*
+import kotlinx.android.synthetic.main.activity_weather.*
+import kotlinx.android.synthetic.main.content_weather.*
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.equalTo
 import org.junit.Rule
@@ -25,7 +23,7 @@ import java.util.*
 
 @RunWith(RobolectricTestRunner::class)
 @Config(application = TestApplication::class)
-class InterviewActivityTest {
+class WeatherActivityTest {
 
     @JvmField @Rule val verifier = ErrorCollector()
 
@@ -36,7 +34,7 @@ class InterviewActivityTest {
                         .withCondition(Condition("Sunny", "45", "8/24/18 12:31 PM".asDate()))
                         .build()))
 
-        val activity = buildActivity(InterviewActivity::class.java).create().get()
+        val activity = buildActivity(WeatherActivity::class.java).create().get()
 
         activity.fab.performClick()
 
@@ -52,7 +50,7 @@ class InterviewActivityTest {
                         .withLocation(Location("Rochester", "US", "NY"))
                         .build()))
 
-        val activity = buildActivity(InterviewActivity::class.java).create().get()
+        val activity = buildActivity(WeatherActivity::class.java).create().get()
 
         activity.fab.performClick()
 
@@ -64,21 +62,13 @@ class InterviewActivityTest {
         `when`(TestApplication.weatherApi.makeQuery(anyString(), anyString())).thenReturn(
                 Observable.error(IOException("API limit hit")))
 
-        val activity = buildActivity(InterviewActivity::class.java).create().get()
+        val activity = buildActivity(WeatherActivity::class.java).create().get()
 
         activity.fab.performClick()
 
         assertThat(activity.findViewById<TextView>(R.id.snackbar_text).text, equalTo<CharSequence>("API limit hit"))
     }
 
-    private fun ViewGroup.children() = object: Iterable<View> {
-        override fun iterator(): Iterator<View> = object : Iterator<View> {
-            var current = 0
-            override fun hasNext(): Boolean = current < childCount
-            override fun next(): View = getChildAt(current++)
-        }
-
-    }
     private fun String.asDate() = SimpleDateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT).parse(this)
 
     private class ResponseBuilder {

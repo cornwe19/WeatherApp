@@ -1,4 +1,4 @@
-package com.cornwell.triplebyteinterview
+package com.cornwell.weather
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
