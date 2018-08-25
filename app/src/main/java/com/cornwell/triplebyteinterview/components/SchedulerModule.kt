@@ -8,13 +8,13 @@ import io.reactivex.schedulers.Schedulers
 import javax.inject.Named
 
 @Module
-class SchedulerModule {
+open class SchedulerModule {
 
     @Provides
     @Named("main")
-    fun provideMainScheduler(): Scheduler = AndroidSchedulers.mainThread()
+    open fun provideMainScheduler(): Scheduler = AndroidSchedulers.mainThread()
     
     @Provides
     @Named("background")
-    fun provideBackgroundScheduler(): Scheduler = Schedulers.io()
+    open fun provideBackgroundScheduler(): Scheduler = Schedulers.io()
 }

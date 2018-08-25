@@ -39,7 +39,7 @@ class InterviewActivity : AppCompatActivity() {
                         condition.text = it.item.condition.text
                         date.text = dateFormat.format(it.item.condition.date)
                     }, {
-                        Snackbar.make(root, "Failed fetching weather", Snackbar.LENGTH_LONG).show()
+                        Snackbar.make(root, it.message ?: "Failed fetching weather", Snackbar.LENGTH_LONG).show()
                     })
         }
     }

@@ -11,11 +11,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 @Module
-class NetworkModule {
+open class NetworkModule {
 
     @Singleton
     @Provides
-    fun provideRetrofit(): Retrofit = Retrofit.Builder()
+    open fun provideRetrofit(): Retrofit = Retrofit.Builder()
             .baseUrl(BuildConfig.ENDPOINT)
             .addConverterFactory(GsonConverterFactory.create(
                     GsonBuilder().setDateFormat(WeatherApi.TIME_FORMAT).create()))
@@ -23,5 +23,5 @@ class NetworkModule {
             .build()
 
     @Provides
-    fun provideWeatherApi(retrofit: Retrofit): WeatherApi = retrofit.create(WeatherApi::class.java)
+    open fun provideWeatherApi(retrofit: Retrofit): WeatherApi = retrofit.create(WeatherApi::class.java)
 }
